@@ -1,6 +1,7 @@
 package ivan;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.hibernate.*;
 import org.hibernate.Session;
@@ -14,33 +15,59 @@ public class MyTestClass {
 
 	//private Session session = null;
 	
-	public static void main(String args[]) {
+	public static void main(String[] args) throws SQLException {
 		System.out.println("start app");
-				
-		/*
-		 * Maven качает новую версию jdbc. Для работы необходимо поменять в hibernate.cfg.xml
-		 * на строку с '.cj.' :
-		 * <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		*/
-		MyJPAdapter adapter = new MyJPAdapter();
-		
-		System.out.println("Добавим записи в БД");
-		Person p = new Person(7, "Leo");
-		adapter.recordsAdd(p);
-		Person p1 = new Person(8, "Sen");
-		adapter.recordsAdd(p1);
-		
-		System.out.println("Прочтем все записи:");
-		List<Person> persons = new ArrayList<Person>();
-		persons = adapter.recordsRead();	
-		System.out.println(persons);
-		
-		
-		System.out.println("Ищем id=3");
-		System.out.println(adapter.recordFind(3));	
+        //testJPA();
+
+        //Connection dbCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/myhibernate", "hiberuser", "991_Roter");
+        //System.out.println(dbCon.isReadOnly());
+
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        /*
+        BotJPAdapter jpAdapter = new BotJPAdapter();
+        List<Botuser> msg = new ArrayList<Botuser>();
+        msg = jpAdapter.recordsRead();
+        msg.stream().limit(5).forEach(System.out::println);
+*/
+
+
 	}
+
+
+    public static void testJPA(){
+        /*
+         * Maven качает новую версию jdbc. Для работы необходимо поменять в hibernate.cfg.xml
+         * на строку с '.cj.' :
+         * <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+         */
+        //проверка доступности БД из кода напрямую без hibernate
+        //Connection dbCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/myhibernate", "hiberuser", "991_Roter");
+        //System.out.println(dbCon.isReadOnly());
+
+
+        MyJPAdapter adapter = new MyJPAdapter();
+
+        System.out.println("Добавим записи в БД");
+        Person p = new Person(66, "Leo");
+        adapter.recordsAdd(p);
+        Person p1 = new Person(67,"Sen");
+        adapter.recordsAdd(p1);
+
+        System.out.println("Прочтем все записи:");
+        List<Person> persons = new ArrayList<Person>();
+        persons = adapter.recordsRead();
+        System.out.println(persons);
+
+
+        System.out.println("Ищем id=3");
+        System.out.println(adapter.recordFind(3));
+    }
 }
-	
+
+
+
 class MyJPAdapter{	
 	
 	private Session session = null;
@@ -112,5 +139,4 @@ class MyJPAdapter{
         Person person = (Person) session.load(Person.class, id);
         return person;
     }
-	
 }

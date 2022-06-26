@@ -6,10 +6,14 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!--property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/myhibernate</property>
         <property name="hibernate.connection.username">hiberuser</property>
-        <property name="hibernate.connection.password">991_Roter</property>
+        <property name="hibernate.connection.password">991_Roter</property-->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:50770/myDBforbot</property>
+        <property name="hibernate.connection.username">BotApplication</property>
+        <property name="hibernate.connection.password">IamBottelegramm</property>
         <!-- JDBC connection pool (use the built-in) -->
         <!-- name="hibernate.connection.pool_size">1 -->
         
@@ -25,7 +29,9 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.useUnicode">true</property>
 
-        <mapping class="ivan.Person" />
+        <mapping class="ivan.Botuser"/>
+        <!--mapping class="ivan.Person" /-->
+
 
     </session-factory>
 </hibernate-configuration>
