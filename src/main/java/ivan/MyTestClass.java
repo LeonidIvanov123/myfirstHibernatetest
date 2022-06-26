@@ -22,15 +22,15 @@ public class MyTestClass {
         //Connection dbCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/myhibernate", "hiberuser", "991_Roter");
         //System.out.println(dbCon.isReadOnly());
 
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+        //SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        //Session session = sessionFactory.openSession();
 
-        /*
+
         BotJPAdapter jpAdapter = new BotJPAdapter();
         List<Botuser> msg = new ArrayList<Botuser>();
         msg = jpAdapter.recordsRead();
         msg.stream().limit(5).forEach(System.out::println);
-*/
+
 
 
 	}
